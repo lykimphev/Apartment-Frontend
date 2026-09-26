@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "https://vowel-dividing-twisting.ngrok-free.dev/api";
+const API_URL = import.meta.env.VITE_API_URL || "https://apartment-api-p06n.onrender.com/api";
 
 const apiClient = axios.create({
   baseURL: API_URL,
