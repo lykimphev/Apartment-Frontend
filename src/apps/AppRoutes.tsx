@@ -14,6 +14,7 @@ import RolePage from "../pages/RolePage";
 import UserRolePage from "../pages/UserRolePage";
 import PermissionPage from "../pages/PermissionPage";
 import RoomPage from "../pages/RoomPage";
+import RoomTypePage from "../pages/RoomTypePage";
 import ItemPage from "../pages/ItemPage";
 import ExchangePage from "../pages/ExchangePage";
 import BookingPage from "../pages/BookingPage";
@@ -38,6 +39,7 @@ export default function AppRoutes(){
                         <Route path="/privacy" element={<PrivacyPage />} />
                         <Route path="/building" element={<BuildingPage/>} />
                         <Route path="/floor" element={<FloorPage/>} />
+                        <Route path="/room-type" element={<RoomTypePage />} />
                         <Route path="/room" element={<RoomPage />} />
                         <Route path="/item" element={<ItemPage />} />
                         <Route path="/exchange" element={<ExchangePage />} />

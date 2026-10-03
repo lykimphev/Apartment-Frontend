@@ -10,7 +10,7 @@ export default function MainLayout() {
   const [showAccountModal, setShowAccountModal] = useState<boolean>(false);
 
   // Auto-detect which group is active based on path
-  const isApartmentRoute = ["/building", "/floor", "/room"].some((p) => location.pathname.startsWith(p));
+  const isApartmentRoute = ["/building", "/floor", "/room-type", "/room"].some((p) => location.pathname.startsWith(p));
   const isSecurityRoute = ["/user", "/role", "/permission", "/user-role"].some((p) => location.pathname.startsWith(p));
   const isStaffRoute = ["/staff", "/position", "/salary", "/payslip"].some((p) => location.pathname.startsWith(p));
   const isExpenseRoute = ["/expense-type", "/expense"].some((p) => location.pathname.startsWith(p));
@@ -50,6 +50,7 @@ export default function MainLayout() {
     if (path === "/") return "Dashboard Overview";
     if (path.startsWith("/building")) return "Buildings Management";
     if (path.startsWith("/floor")) return "Floors Management";
+    if (path.startsWith("/room-type")) return "Room Types Management";
     if (path.startsWith("/room")) return "Rooms Management";
     if (path.startsWith("/item")) return "Items Management";
     if (path.startsWith("/exchange")) return "Exchange Rates";
@@ -185,6 +186,14 @@ export default function MainLayout() {
                 >
                   <span className="sub-dot"></span>
                   <span>Floors</span>
+                </NavLink>
+
+                <NavLink
+                  to="/room-type"
+                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
+                >
+                  <span className="sub-dot"></span>
+                  <span>Room Types</span>
                 </NavLink>
 
                 <NavLink
