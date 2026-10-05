@@ -62,28 +62,100 @@ const COMPLETED_MODULES: ModuleConfig[] = [
         icon: "bi bi-grid-3x3-gap",
         actions: ["View", "Create", "Edit", "Delete"],
       },
+      {
+        key: "Room",
+        label: "Rooms Units",
+        icon: "bi bi-door-open",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "Item",
+        label: "Inventory Items",
+        icon: "bi bi-box-seam",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
     ],
   },
   {
-    id: "guest",
-    name: "Guests Management",
+    id: "operations",
+    name: "Bookings & Operations",
     subcategories: [
       {
+        key: "Exchange",
+        label: "Exchange Rates",
+        icon: "bi bi-currency-exchange",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "Booking",
+        label: "Bookings",
+        icon: "bi bi-calendar-check",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
         key: "Guest",
-        label: "Guest Directory",
-        icon: "bi bi-person-check",
+        label: "Guests",
+        icon: "bi bi-people",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+    ],
+  },
+  {
+    id: "staff_hr",
+    name: "Staff & HR",
+    subcategories: [
+      {
+        key: "Staff",
+        label: "Staff Members",
+        icon: "bi bi-person-badge",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "Position",
+        label: "Positions",
+        icon: "bi bi-briefcase",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "Salary",
+        label: "Base Salaries",
+        icon: "bi bi-cash-stack",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "PaySlip",
+        label: "Monthly Payslips",
+        icon: "bi bi-receipt-cutoff",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+    ],
+  },
+  {
+    id: "expenses",
+    name: "Expenses",
+    subcategories: [
+      {
+        key: "OtherExpense",
+        label: "Other Expenses",
+        icon: "bi bi-wallet2",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "ExpenseType",
+        label: "Expense Categories",
+        icon: "bi bi-tags",
         actions: ["View", "Create", "Edit", "Delete"],
       },
     ],
   },
   {
     id: "security",
-    name: "System & Administration",
+    name: "User & Security",
     subcategories: [
       {
         key: "User",
         label: "Users",
-        icon: "bi bi-people",
+        icon: "bi bi-person-circle",
         actions: ["View", "Create", "Edit", "Delete"],
       },
       {
@@ -96,6 +168,12 @@ const COMPLETED_MODULES: ModuleConfig[] = [
         key: "Permission",
         label: "Permissions",
         icon: "bi bi-shield-check",
+        actions: ["View", "Create", "Edit", "Delete"],
+      },
+      {
+        key: "UserRole",
+        label: "Assign Roles",
+        icon: "bi bi-person-gear",
         actions: ["View", "Create", "Edit", "Delete"],
       },
     ],
