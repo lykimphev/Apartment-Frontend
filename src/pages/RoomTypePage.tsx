@@ -208,7 +208,7 @@ export default function RoomTypePage() {
                 <th>Room Type (English)</th>
                 <th>Room Type (Khmer / ភាសាខ្មែរ)</th>
                 <th style={{ width: "160px" }}>Status</th>
-                <th style={{ width: "150px" }} className="text-end pe-4">
+                <th style={{ width: "160px" }} className="text-center">
                   Actions
                 </th>
               </tr>
@@ -259,27 +259,23 @@ export default function RoomTypePage() {
                         <i className="fa-solid fa-check-circle me-1"></i> Active
                       </Badge>
                     </td>
-                    <td className="text-end pe-4">
-                      <div className="d-inline-flex gap-1.5">
+                    <td className="text-center">
+                      <div className="d-flex justify-content-center gap-2">
                         <Button
-                          variant="outline-primary"
-                          size="sm"
-                          className="px-2.5 py-1 rounded-2 shadow-xs"
+                          type="button"
+                          className="btn-action-edit"
                           onClick={() => handleEdit(item)}
                           title="Edit Room Type"
                         >
-                          <i className="fa-solid fa-pen-to-square me-1"></i>
-                          <span>Edit</span>
+                          Edit
                         </Button>
                         <Button
-                          variant="outline-danger"
-                          size="sm"
-                          className="px-2.5 py-1 rounded-2 shadow-xs"
+                          type="button"
+                          className="btn-action-delete"
                           onClick={() => handleDelete(item.id, item.roomtypeName)}
                           title="Delete Room Type"
                         >
-                          <i className="fa-solid fa-trash me-1"></i>
-                          <span>Delete</span>
+                          Delete
                         </Button>
                       </div>
                     </td>
