@@ -175,24 +175,6 @@ export default function LoginPage() {
           </Alert>
         )}
 
-        {/* Remaining Attempts Warning */}
-        {!isLocked && failedAttempts > 0 && (
-          <Alert
-            variant="warning"
-            className="rounded-3 py-2 px-3 mb-3 small d-flex align-items-center justify-content-between border-0 bg-warning bg-opacity-10 text-dark"
-          >
-            <div className="d-flex align-items-center gap-2">
-              <i className="fa-solid fa-triangle-exclamation text-warning fs-6"></i>
-              <span>
-                <strong>{5 - failedAttempts}</strong> attempt(s) remaining
-              </span>
-            </div>
-            <span className="badge bg-warning text-dark rounded-pill">
-              {failedAttempts}/5 used
-            </span>
-          </Alert>
-        )}
-
         {/* Login Form */}
         <Form onSubmit={onLogin}>
           {/* Username Input */}
@@ -252,17 +234,35 @@ export default function LoginPage() {
             </InputGroup>
           </Form.Group>
 
-          {/* Remember Me */}
-          <div className="d-flex justify-content-between align-items-center mb-4">
+          {/* Remember Me & Remaining Attempts Row */}
+          <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <Form.Check
               type="checkbox"
               id="rememberMe"
               label="Remember me"
-              className="small text-muted"
+              className="small text-muted user-select-none mb-0"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
               disabled={loading || isLocked}
             />
+
+            {!isLocked && failedAttempts > 0 && (
+              <div
+                className="d-inline-flex align-items-center gap-1.5 px-2.5 py-1 rounded-pill bg-warning bg-opacity-10 text-dark border border-warning border-opacity-25 shadow-xs"
+                style={{ fontSize: "12px", fontWeight: 500 }}
+              >
+                <i className="fa-solid fa-triangle-exclamation text-warning" style={{ fontSize: "11px" }}></i>
+                <span>
+                  <strong>{5 - failedAttempts}</strong> attempt{5 - failedAttempts > 1 ? "s" : ""} left
+                </span>
+                <span
+                  className="badge bg-warning text-dark rounded-pill ms-1"
+                  style={{ fontSize: "10px", padding: "2px 6px" }}
+                >
+                  {failedAttempts}/5
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Submit Button */}
