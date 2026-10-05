@@ -715,7 +715,7 @@ export default function RoomPage() {
                     value={selectedItemId}
                     onChange={handleItemSelectChange}
                     required
-                  >
+                  > 
                     {allItems.map((item) => (
                       <option key={item.id} value={item.id}>
                         {item.itemName}
