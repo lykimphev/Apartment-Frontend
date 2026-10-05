@@ -766,30 +766,34 @@ export default function RoomPage() {
               </thead>
               <tbody>
                 {roomDetailsList && roomDetailsList.length > 0 ? (
-                  roomDetailsList.map((detail) => (
-                    <tr key={detail.id}>
-                      <td className="fw-semibold text-dark">
-                        {detail.item?.itemName || `Item #${detail.itemId}`}
-                      </td>
-                      <td className="text-secondary">
-                        {detail.item?.itemNameKH || "—"}
-                      </td>
-                      <td className="fw-bold text-success">
-                        ${Number(detail.price || detail.item?.price || 0).toFixed(2)}
-                      </td>
-                      <td className="text-center">
-                        <Button
-                          size="sm"
-                          variant="outline-danger"
-                          className="rounded-2 px-2 py-1"
-                          onClick={() => handleDeleteRoomDetail(detail.id)}
-                          title="Remove item"
-                        >
-                          <i className="fa-solid fa-trash-can"></i>
-                        </Button>
-                      </td>
-                    </tr>
-                  ))
+                  roomDetailsList.map((detail) => {
+                    const assignedItem =
+                      detail.item || allItems.find((i) => i.id === detail.itemId);
+                    return (
+                      <tr key={detail.id}>
+                        <td className="fw-semibold text-dark">
+                          {assignedItem?.itemName || `Item #${detail.itemId}`}
+                        </td>
+                        <td className="text-secondary">
+                          {assignedItem?.itemNameKH || "—"}
+                        </td>
+                        <td className="fw-bold text-success">
+                          ${Number(detail.price || assignedItem?.price || 0).toFixed(2)}
+                        </td>
+                        <td className="text-center">
+                          <Button
+                            size="sm"
+                            variant="outline-danger"
+                            className="rounded-2 px-2 py-1"
+                            onClick={() => handleDeleteRoomDetail(detail.id)}
+                            title="Remove item"
+                          >
+                            <i className="fa-solid fa-trash-can"></i>
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })
                 ) : (
                   <tr>
                     <td colSpan={4} className="text-center py-4 text-muted">
