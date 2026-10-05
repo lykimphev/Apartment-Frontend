@@ -718,7 +718,7 @@ export default function RoomPage() {
                   >
                     {allItems.map((item) => (
                       <option key={item.id} value={item.id}>
-                        {item.itemName} ({item.itemNameKH}) — ${Number(item.price || 0).toFixed(2)}
+                        {item.itemName}
                       </option>
                     ))}
                   </Form.Select>
