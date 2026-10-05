@@ -232,6 +232,12 @@ export default function GuestPage() {
                           height: "100%",
                           objectFit: "cover",
                         }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "https://ui-avatars.com/api/?name=" +
+                            encodeURIComponent(formData.name || "Guest") +
+                            "&background=2563eb&color=fff";
+                        }}
                       />
                     ) : (
                       <i className="fa-solid fa-user fs-1 text-secondary opacity-50"></i>
@@ -518,13 +524,20 @@ export default function GuestPage() {
                           }}
                           onError={(e) => {
                             (e.target as HTMLImageElement).src =
-                              "https://placehold.co/40x40?text=Guest";
+                              "https://ui-avatars.com/api/?name=" +
+                              encodeURIComponent(guest.name || "Guest") +
+                              "&background=2563eb&color=fff";
                           }}
                         />
                       ) : (
                         <div
-                          className="rounded-circle bg-light d-flex align-items-center justify-content-center text-secondary fw-semibold border"
-                          style={{ width: "40px", height: "40px" }}
+                          className="rounded-circle d-flex align-items-center justify-content-center text-white fw-bold shadow-sm"
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                            background: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+                            fontSize: "14px",
+                          }}
                         >
                           {guest.name ? guest.name.charAt(0).toUpperCase() : "G"}
                         </div>
