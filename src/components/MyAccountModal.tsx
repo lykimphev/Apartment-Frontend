@@ -18,8 +18,8 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
   const rolesJson = localStorage.getItem("roles");
   const roles: string[] = rolesJson ? JSON.parse(rolesJson) : ["Administrator"];
 
-  const username = currentUser?.username || "admin";
-  const fullName = currentUser?.fullName || "System Administrator";
+  const username = currentUser?.username || "Admin";
+  const fullName = currentUser?.fullName || "Administrator";
   const email = currentUser?.email || "admin@apartment.com";
   const userId = currentUser?.id || 42;
   const isActive = currentUser?.isActive !== 0;
@@ -49,14 +49,7 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
   };
 
   return (
-    <Modal
-      show={show}
-      onHide={onHide}
-      centered
-      size="lg"
-      className="my-account-modal"
-      backdrop="static"
-    >
+    <Modal show={show} onHide={onHide} centered size="lg" className="my-account-modal" backdrop="static">
       {/* Modal Header */}
       <Modal.Header closeButton className="border-0 pb-0 pt-3 px-4">
         <Modal.Title className="fw-bold fs-5 text-dark d-flex align-items-center gap-2">
@@ -127,7 +120,7 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
 
               {/* Roles Badges */}
               <div className="d-flex flex-wrap align-items-center gap-1.5">
-                {roles.map((r, i) => (
+                {roles.map((r: any, i: number) => (
                   <Badge
                     key={i}
                     bg="light"
@@ -136,7 +129,7 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
                     style={{ fontSize: "11px" }}
                   >
                     <i className="fa-solid fa-shield-halved text-primary me-1"></i>
-                    {r}
+                    {typeof r === "object" && r !== null ? r.name || "Role" : r}
                   </Badge>
                 ))}
               </div>
@@ -241,9 +234,7 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
                     <span className="text-muted small fw-semibold text-uppercase" style={{ fontSize: "11px" }}>
                       Account Created
                     </span>
-                    <div className="fw-bold text-dark mt-1 fs-6">
-                      {formatDate(currentUser?.createdAt)}
-                    </div>
+                    <div className="fw-bold text-dark mt-1 fs-6">{formatDate(currentUser?.createdAt)}</div>
                   </Card>
                 </Col>
               </Row>
@@ -288,11 +279,31 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
 
               <Row className="g-2.5">
                 {[
-                  { name: "Apartment & Rooms Management", desc: "Manage buildings, floors, rooms, room types & items", icon: "fa-building" },
-                  { name: "Guest & Tenant Management", desc: "Register tenants, upload identity documents, verify passports", icon: "fa-id-card" },
-                  { name: "Staff & Payroll Management", desc: "Manage staff profiles, monthly payslips and base salaries", icon: "fa-user-tie" },
-                  { name: "Financial & Expense Tracking", desc: "Record utilities, exchange rates, and maintenance expenses", icon: "fa-receipt" },
-                  { name: "User & Security Control", desc: "Assign roles, manage system accounts, configure permissions", icon: "fa-lock" },
+                  {
+                    name: "Apartment & Rooms Management",
+                    desc: "Manage buildings, floors, rooms, room types & items",
+                    icon: "fa-building",
+                  },
+                  {
+                    name: "Guest & Tenant Management",
+                    desc: "Register tenants, upload identity documents, verify passports",
+                    icon: "fa-id-card",
+                  },
+                  {
+                    name: "Staff & Payroll Management",
+                    desc: "Manage staff profiles, monthly payslips and base salaries",
+                    icon: "fa-user-tie",
+                  },
+                  {
+                    name: "Financial & Expense Tracking",
+                    desc: "Record utilities, exchange rates, and maintenance expenses",
+                    icon: "fa-receipt",
+                  },
+                  {
+                    name: "User & Security Control",
+                    desc: "Assign roles, manage system accounts, configure permissions",
+                    icon: "fa-lock",
+                  },
                 ].map((perm, idx) => (
                   <Col md={12} key={idx}>
                     <div className="p-2.5 rounded-3 border bg-white d-flex align-items-center justify-content-between">
@@ -305,7 +316,9 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
                         </div>
                         <div>
                           <div className="fw-bold small text-dark">{perm.name}</div>
-                          <div className="text-muted" style={{ fontSize: "11px" }}>{perm.desc}</div>
+                          <div className="text-muted" style={{ fontSize: "11px" }}>
+                            {perm.desc}
+                          </div>
                         </div>
                       </div>
                       <Badge bg="success" className="rounded-pill px-2 py-0.5" style={{ fontSize: "11px" }}>
@@ -442,12 +455,7 @@ export default function MyAccountModal({ show, onHide, onLogout }: MyAccountModa
           <span>Sign Out</span>
         </Button>
 
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={onHide}
-          className="rounded-3 px-4 py-2 fw-semibold"
-        >
+        <Button variant="secondary" size="sm" onClick={onHide} className="rounded-3 px-4 py-2 fw-semibold">
           Close
         </Button>
       </Modal.Footer>

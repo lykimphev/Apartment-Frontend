@@ -29,10 +29,19 @@ export default function MainLayout() {
       [groupKey]: !prev[groupKey],
     }));
   };
+  // Read current user & roles safely from localStorage
+  let currentUser: any = null;
+
+  try {
+    const userJson = localStorage.getItem("user");
+    if (userJson && userJson! == " undefined") {
+      currentUser = JSON.parse(userJson);
+    }
+  } catch (error) {
+    console.error("Error parsing user data from localStorage:", error);
+  }
 
   // User Profile Data
-  const userJson = localStorage.getItem("user");
-  const currentUser = userJson ? JSON.parse(userJson) : null;
   const username = currentUser?.username || "Admin";
   const email = currentUser?.email || "admin@example.com";
   const fullName = currentUser?.fullName || "Alex Johnson";
@@ -127,11 +136,7 @@ export default function MainLayout() {
         </div>
 
         {/* Navigation Menu with Spacious Vertical Spacing */}
-        <div
-          className={`flex-grow-1 py-3 d-flex flex-column gap-1.5 overflow-y-auto ${
-            collapsed ? "px-2" : "px-3"
-          }`}
-        >
+        <div className={`flex-grow-1 py-3 d-flex flex-column gap-1.5 overflow-y-auto ${collapsed ? "px-2" : "px-3"}`}>
           {/* Dashboard */}
           <NavLink
             to="/"
@@ -172,34 +177,22 @@ export default function MainLayout() {
             {/* Sub-items with clean tree line and comfortable vertical margins */}
             {!collapsed && openGroups.apartment && (
               <div className="sub-menu-tree mt-2 mb-1 d-flex flex-column gap-1.5">
-                <NavLink
-                  to="/building"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/building" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Buildings</span>
                 </NavLink>
 
-                <NavLink
-                  to="/floor"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/floor" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Floors</span>
                 </NavLink>
 
-                <NavLink
-                  to="/room-type"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/room-type" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Room Types</span>
                 </NavLink>
 
-                <NavLink
-                  to="/room"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/room" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Rooms</span>
                 </NavLink>
@@ -285,42 +278,28 @@ export default function MainLayout() {
                 {!collapsed && <span>Staff & HR</span>}
               </div>
               {!collapsed && (
-                <i
-                  className={`fa-solid ${openGroups.staff ? "fa-chevron-down" : "fa-chevron-right"} chevron-icon`}
-                ></i>
+                <i className={`fa-solid ${openGroups.staff ? "fa-chevron-down" : "fa-chevron-right"} chevron-icon`}></i>
               )}
             </div>
 
             {!collapsed && openGroups.staff && (
               <div className="sub-menu-tree mt-2 mb-1 d-flex flex-column gap-1.5">
-                <NavLink
-                  to="/staff"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/staff" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Staff Members</span>
                 </NavLink>
 
-                <NavLink
-                  to="/position"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/position" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Positions</span>
                 </NavLink>
 
-                <NavLink
-                  to="/salary"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/salary" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Base Salaries</span>
                 </NavLink>
 
-                <NavLink
-                  to="/payslip"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/payslip" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Monthly Payslips</span>
                 </NavLink>
@@ -351,18 +330,12 @@ export default function MainLayout() {
             {/* Sub-items with clean tree line */}
             {!collapsed && openGroups.expense && (
               <div className="sub-menu-tree mt-2 mb-1 d-flex flex-column gap-1.5">
-                <NavLink
-                  to="/expense"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/expense" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Other Expenses</span>
                 </NavLink>
 
-                <NavLink
-                  to="/expense-type"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/expense-type" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Expense Categories</span>
                 </NavLink>
@@ -393,34 +366,22 @@ export default function MainLayout() {
             {/* Sub-items with clean tree line and comfortable vertical margins */}
             {!collapsed && openGroups.security && (
               <div className="sub-menu-tree mt-2 mb-1 d-flex flex-column gap-1.5">
-                <NavLink
-                  to="/user"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/user" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Users</span>
                 </NavLink>
 
-                <NavLink
-                  to="/role"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/role" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Roles</span>
                 </NavLink>
 
-                <NavLink
-                  to="/permission"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/permission" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Permissions</span>
                 </NavLink>
 
-                <NavLink
-                  to="/user-role"
-                  className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}
-                >
+                <NavLink to="/user-role" className={({ isActive }) => `sub-nav-item ${isActive ? "active" : ""}`}>
                   <span className="sub-dot"></span>
                   <span>Assign Roles</span>
                 </NavLink>
@@ -529,7 +490,11 @@ export default function MainLayout() {
                   <div className="text-muted small text-truncate" style={{ fontSize: "12px" }}>
                     {email}
                   </div>
-                  <Badge bg="primary" className="mt-1.5 px-2 py-0.5 rounded-pill fw-semibold" style={{ fontSize: "10px" }}>
+                  <Badge
+                    bg="primary"
+                    className="mt-1.5 px-2 py-0.5 rounded-pill fw-semibold"
+                    style={{ fontSize: "10px" }}
+                  >
                     Administrator
                   </Badge>
                 </div>
@@ -583,10 +548,7 @@ export default function MainLayout() {
         {/* Footer */}
         <footer className="bg-white border-top py-3 px-4 text-muted small mt-auto">
           <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
-            <span>
-              &copy; {new Date().getFullYear()} Apartment Management System. All rights
-              reserved.
-            </span>
+            <span>&copy; {new Date().getFullYear()} Apartment Management System. All rights reserved.</span>
             <div className="d-flex gap-3">
               <Link to="/about" className="text-muted text-decoration-none">
                 About
@@ -600,11 +562,7 @@ export default function MainLayout() {
       </div>
 
       {/* Account Profile Modal */}
-      <MyAccountModal
-        show={showAccountModal}
-        onHide={() => setShowAccountModal(false)}
-        onLogout={handleLogout}
-      />
+      <MyAccountModal show={showAccountModal} onHide={() => setShowAccountModal(false)} onLogout={handleLogout} />
     </div>
   );
 }
