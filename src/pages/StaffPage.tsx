@@ -107,6 +107,7 @@ export default function StaffPage() {
       identityNo: staff.identityNo || "",
       status: staff.status || "Active",
       photo: null,
+      removePhoto: false,
     });
     setPhotoPreview(staff.photo ? getImageUrl(staff.photo) : null);
     if (fileInputRef.current) fileInputRef.current.value = "";
@@ -131,13 +132,13 @@ export default function StaffPage() {
         toast.error("File size cannot exceed 5MB.");
         return;
       }
-      setFormData({ ...formData, photo: file });
+      setFormData({ ...formData, photo: file, removePhoto: false });
       setPhotoPreview(URL.createObjectURL(file));
     }
   };
 
   const handleRemovePhoto = () => {
-    setFormData({ ...formData, photo: null });
+    setFormData({ ...formData, photo: null, removePhoto: true });
     setPhotoPreview(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };

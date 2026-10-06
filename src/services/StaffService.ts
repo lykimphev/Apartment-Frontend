@@ -61,6 +61,7 @@ export const StaffService = {
       if (data.status) body.append("Status", data.status);
       if (data.createBy) body.append("CreateBy", data.createBy.toString());
       if (data.photo) body.append("Photo", data.photo);
+      if (data.removePhoto) body.append("RemovePhoto", "true");
     }
     return await apiClient.put(`${END_POINT}/${id}`, body);
   },

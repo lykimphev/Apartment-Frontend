@@ -29,6 +29,7 @@ export interface StaffReq {
   email?: string;
   identityNo?: string;
   photo?: File | null;
+  removePhoto?: boolean;
   status?: string;
   createBy?: number;
 }

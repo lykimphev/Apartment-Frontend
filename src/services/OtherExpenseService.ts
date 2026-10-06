@@ -67,6 +67,7 @@ export const OtherExpenseService = {
       if (data.note) body.append("Note", data.note);
       if (data.createBy) body.append("CreateBy", data.createBy);
       if (data.image) body.append("Image", data.image);
+      if (data.removeImage) body.append("RemoveImage", "true");
     }
     return await apiClient.put(`${END_POINT}/${id}`, body);
   },

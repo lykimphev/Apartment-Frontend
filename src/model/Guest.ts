@@ -27,4 +27,5 @@ export interface GuestReq {
   passport?: string;
   status?: string;
   image?: File | null;
+  removeImage?: boolean;
 }

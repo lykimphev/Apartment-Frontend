@@ -72,6 +72,7 @@ export const GuestService = {
       body.append("Passport", data.passport || "");
       body.append("Status", data.status || "");
       if (data.image) body.append("Image", data.image);
+      if (data.removeImage) body.append("RemoveImage", "true");
     }
 
     return await apiClient.put(`${END_POINT}/${id}`, body);

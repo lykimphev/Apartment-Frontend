@@ -45,6 +45,7 @@ export default function OtherExpensePage() {
   // File upload preview inside form
   const [imageFilePreview, setImageFilePreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [removeImage, setRemoveImage] = useState<boolean>(false);
 
   // Category options
   const [categories, setCategories] = useState<ExpenseTypeRes[]>([]);
@@ -98,6 +99,7 @@ export default function OtherExpensePage() {
     });
     setSelectedFile(null);
     setImageFilePreview(null);
+    setRemoveImage(false);
     setOpenModal(true);
   };
 
@@ -117,6 +119,7 @@ export default function OtherExpensePage() {
     });
     setSelectedFile(null);
     setImageFilePreview(item.image ? getImageUrl(item.image) : null);
+    setRemoveImage(false);
     setOpenModal(true);
   };
 
@@ -124,6 +127,7 @@ export default function OtherExpensePage() {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSelectedFile(file);
+      setRemoveImage(false);
       setImageFilePreview(URL.createObjectURL(file));
     }
   };
@@ -131,6 +135,7 @@ export default function OtherExpensePage() {
   const handleClearFile = () => {
     setSelectedFile(null);
     setImageFilePreview(null);
+    setRemoveImage(true);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -149,6 +154,7 @@ export default function OtherExpensePage() {
       const payload: OtherExpenseReq = {
         ...formData,
         image: selectedFile,
+        removeImage: removeImage,
       };
 
       if (editingId > 0) {

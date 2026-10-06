@@ -24,6 +24,7 @@ export default function GuestPage() {
   const [guestId, setGuestId] = useState<number>(0);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [removeImage, setRemoveImage] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const initialForm: GuestReq = {
@@ -63,6 +64,7 @@ export default function GuestPage() {
     setGuestId(0);
     setImagePreview(null);
     setSelectedFile(null);
+    setRemoveImage(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -87,6 +89,7 @@ export default function GuestPage() {
     setGuestId(guest.id);
     setImagePreview(guest.imagePath ? getImageUrl(guest.imagePath) : null);
     setSelectedFile(null);
+    setRemoveImage(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -97,8 +100,18 @@ export default function GuestPage() {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
+      setRemoveImage(false);
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    setSelectedFile(null);
+    setImagePreview(null);
+    setRemoveImage(true);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -113,6 +126,7 @@ export default function GuestPage() {
       const payload: GuestReq = {
         ...formData,
         image: selectedFile,
+        removeImage: removeImage,
       };
 
       if (guestId > 0) {
@@ -243,7 +257,7 @@ export default function GuestPage() {
                       <i className="fa-solid fa-user fs-1 text-secondary opacity-50"></i>
                     )}
                   </div>
-                  <div>
+                  <div className="d-flex gap-2">
                     <Form.Label
                       htmlFor="guestPhotoInput"
                       className="btn btn-sm btn-outline-primary mb-0 cursor-pointer"
@@ -251,6 +265,16 @@ export default function GuestPage() {
                       <i className="fa-solid fa-camera me-1"></i>{" "}
                       {imagePreview ? "Change Photo" : "Upload Photo"}
                     </Form.Label>
+                    {imagePreview && (
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        className="mb-0"
+                        onClick={handleRemovePhoto}
+                      >
+                        <i className="fa-solid fa-trash me-1"></i> Remove
+                      </Button>
+                    )}
                     <Form.Control
                       type="file"
                       id="guestPhotoInput"

@@ -19,4 +19,5 @@ export interface OtherExpenseReq {
   note?: string;
   createBy?: string;
   image?: File | null;
+  removeImage?: boolean;
 }
